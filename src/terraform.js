@@ -28,6 +28,14 @@ const { connect } = require('http2');
     core.info('GITHUB_TOKEN')
     core.info('${{ secrets.GITHUB_TOKEN }}')
     core.info(process.env)
+
+
+    let test = await axios.get('https://github.com/scalr/scalr-cli/releases/latest');
+
+    test.headers.forEach((head) => {
+        core.info(head)
+    })
+
     
     core.info('Fetch latest version of Scalr CLI')
     let latest = await axios.get('https://api.github.com/repos/Scalr/scalr-cli/releases/latest');
