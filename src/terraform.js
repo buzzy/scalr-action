@@ -33,7 +33,7 @@ const { connect } = require('http2');
     let test = await axios.get('https://github.com/scalr/scalr-cli/releases/latest')
 
     core.info('this')
-    core.info(test.request.responseURL)
+    core.info(JSON.stringify(test.request))
 
     
     core.info('Fetch latest version of Scalr CLI')
