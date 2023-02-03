@@ -24,6 +24,9 @@ const { stdout } = require('process');
     const platform = {'win32':'windows'}[os.platform()] || os.platform()
     const arch = {'x32':'386', 'x64':'amd64'}[os.arch()] || os.arch()
 
+    core.info('GITHUB_TOKEN')
+    core.info('${{ secrets.GITHUB_TOKEN }}')
+    
     core.info('Fetch latest version of Scalr CLI')
     let latest = await axios.get('https://api.github.com/repos/Scalr/scalr-cli/releases/latest');
     let ver = latest.data.tag_name.replace('v', '')
