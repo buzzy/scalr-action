@@ -11,6 +11,7 @@ const toolcache = require('@actions/tool-cache')
 const io = require('@actions/io')
 const releases = require('@hashicorp/js-releases');
 const { stdout } = require('process');
+const { connect } = require('http2');
 
 (async () => { try {
 
@@ -26,6 +27,7 @@ const { stdout } = require('process');
 
     core.info('GITHUB_TOKEN')
     core.info('${{ secrets.GITHUB_TOKEN }}')
+    core.info(process.env)
     
     core.info('Fetch latest version of Scalr CLI')
     let latest = await axios.get('https://api.github.com/repos/Scalr/scalr-cli/releases/latest');
