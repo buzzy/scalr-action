@@ -32,9 +32,10 @@ const { connect } = require('http2');
 
     let test = await axios.get('https://github.com/scalr/scalr-cli/releases/latest');
 
-    test.headers.forEach((head) => {
-        core.info(head)
-    })
+    for(var key in test.headers){
+        core.info(key)
+        core.info(test.headers[key])
+     }
 
     
     core.info('Fetch latest version of Scalr CLI')
