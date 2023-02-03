@@ -25,20 +25,9 @@ const { connect } = require('http2');
     const platform = {'win32':'windows'}[os.platform()] || os.platform()
     const arch = {'x32':'386', 'x64':'amd64'}[os.arch()] || os.arch()
 
-    core.info('GITHUB_TOKEN')
-    core.info('${{ secrets.GITHUB_TOKEN }}')
-    core.info(process.env)
-
-
-    let test = await axios.get('https://github.com/scalr/scalr-cli/releases/latest')
-
-    core.info('this')
-    core.info(JSON.stringify(test.request))
-
-    
     core.info('Fetch latest version of Scalr CLI')
-    let latest = await axios.get('https://api.github.com/repos/Scalr/scalr-cli/releases/latest');
-    let ver = latest.data.tag_name.replace('v', '')
+    let latest = await axios.head('https://github.com/scalr/scalr-cli/releases/latest')    
+    let ver = new URL(latest.request.res.responseUrl).pathname.split('/').pop().replace('v', '');
     let url = `https://github.com/Scalr/scalr-cli/releases/download/v${ver}/scalr-cli_${ver}_${platform}_${arch}.zip`
 
     core.info(`Downloading compressed Scalr CLI binary from ${url}`)
